@@ -43,12 +43,22 @@ public class Logs {
     }
     
     private List<String> leerArchivos(){
+        
+        //primero leer el achivo
+        //separa cada renglon par que se nos sea mas facil buscar las coincidencias
+        
         return null;
     }
 
-    public Map<String, Integer> contarMensajes() {
-
-        return this.numeroMensajes;
+    public void contarMensajes() {
+        /*
+            Dentro de un ciclo ve iterando y en cada iterancion valida la expresion coincide con algun renglon
+        
+            si es asi solo ve aumentando el contador
+            el contador se encuentra en el map
+            solo ve como manipular los map
+        */
+        return;
     }
 
 }
