@@ -12,5 +12,8 @@ package ejercicio_2;
         Pattern pattern = Pattern.compile(regex);
  */
 public class Main {
-    
+    public static void main(String[] args){
+        Logs logs = new Logs("aplicacion.text");
+        logs.buscadorDeMensajes(new String[]{"INFO", "ERROR", "WARNING"});
+    }
 }

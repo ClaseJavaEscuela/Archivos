@@ -4,10 +4,12 @@
  */
 package ejercicio_2;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,12 +28,10 @@ public class Logs {
         return;
     }
 
-    public Logs(String ruta, String[] mensajes) {
+    public Logs(String ruta) {
         this.ruta = ruta;
         this.numeroMensajes = new HashMap<>();
-        this.expresiones = new Pattern[mensajes.length];
-        inicializar(mensajes);
-        inicializarExpresiones(mensajes);
+
     }
 
     private void inicializarExpresiones(String[] mensajes) {
@@ -41,24 +41,52 @@ public class Logs {
             this.expresiones[i] = expresion;
         }
     }
-    
-    private List<String> leerArchivos(){
-        
-        //primero leer el achivo
-        //separa cada renglon par que se nos sea mas facil buscar las coincidencias
-        
-        return null;
+
+    private List<String> leerArchivos() {
+        List<String> lineas = new ArrayList<>();
+        try (BufferedReader archivo = new BufferedReader(new FileReader(this.ruta))) {
+            String linea;
+            while ((linea = archivo.readLine()) != null) {
+                lineas.add(linea);
+            }
+        } catch (IOException e) {
+            System.out.println("No se logro encontrar el archivo");
+        }
+        return lineas;
     }
 
-    public void contarMensajes() {
-        /*
-            Dentro de un ciclo ve iterando y en cada iterancion valida la expresion coincide con algun renglon
-        
-            si es asi solo ve aumentando el contador
-            el contador se encuentra en el map
-            solo ve como manipular los map
-        */
-        return;
+    private void escribirResultados(){
+        try(BufferedWriter escritor = new BufferedWriter(new FileWriter("resultados.text"))){
+            for(String resultado: numeroMensajes.keySet()){
+                escritor.write(resultado + " : " + numeroMensajes.get(resultado) + "\n");
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void contarMensajes(String[] mensajes) {
+        List<String> mensajesLeidos =  leerArchivos();
+        this.expresiones = new Pattern[mensajes.length];
+
+        inicializar(mensajes);
+        inicializarExpresiones(mensajes);
+
+        for(String mensaje : mensajesLeidos){
+            for(int i=0; i<mensajes.length;i++){
+                if(expresiones[i].matcher(mensaje).matches()){
+                    numeroMensajes.put(mensajes[i], numeroMensajes.get(mensajes[i])+1);
+                }
+            }
+        }
+        return ;
+    }
+
+    public void buscadorDeMensajes(String[] mensajes){
+        contarMensajes(mensajes);
+        escribirResultados();
+        System.out.println("Busqueda terminada");
     }
 
 }

@@ -1,0 +1,6 @@
+ID,Nombre,Departamento,Salario
+1,Juan Pérez,IT,45000
+2,Maria López,RH,50000
+3,Carlos Ruiz,IT,60000
+4,Sofia García,Marketing,40000
+5,Andrés Torres,RH,55000
