@@ -13,7 +13,7 @@ package ejercicio_2;
  */
 public class Main {
     public static void main(String[] args){
-        Logs logs = new Logs("aplicacion.text");
+        Logs logs = new Logs("aplicacion.log");
         logs.buscadorDeMensajes(new String[]{"INFO", "ERROR", "WARNING"});
     }
 }

@@ -56,7 +56,7 @@ public class Logs {
     }
 
     private void escribirResultados(){
-        try(BufferedWriter escritor = new BufferedWriter(new FileWriter("resultados.text"))){
+        try(BufferedWriter escritor = new BufferedWriter(new FileWriter("resultados.txt"))){
             for(String resultado: numeroMensajes.keySet()){
                 escritor.write(resultado + " : " + numeroMensajes.get(resultado) + "\n");
             }
